@@ -27,7 +27,7 @@ jobs:
           tenant: ${{ secrets.tenant }}
           registry: ${{ secrets.registry }}
           repository: ${{ secrets.repository }}
-          image:  azure-vote-front
+          image:  myapp
           folder: django
           branch: master
           tag: ${{ github.sha }}
@@ -52,5 +52,5 @@ jobs:
           namespace: 'default'
           manifests: |
              azure-vote-all-in-one-redis.yaml
-          images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/azure-vote-front:${{ github.sha }}'
+          images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/django:${{ github.sha }}'
           pull-images: false

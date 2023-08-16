@@ -14,6 +14,10 @@ on:
         required: true
         default: "myResourceGroup"
         
+      runs_on:
+        description: 'Please enter your runner'
+        required: true
+        default: "ubuntu-latest"
 runs:
   using: "composite"
   steps:

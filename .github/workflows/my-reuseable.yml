@@ -16,7 +16,7 @@ on:
 jobs:
   my-deploy-common:
     name: Deploy Common
-    runs-on: ${{ inputs.RUNS-ON }}
+    runs-on: ${{ inputs.runs-on }}
     steps:
       - name: "Common Setup"
         uses: ./.github/actions/common-setup

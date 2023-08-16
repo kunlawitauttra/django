@@ -19,10 +19,6 @@ on:
 
 jobs:
   call-workflow-deploy-microservice:
-    strategy:
-      fail-fast: false
-      matrix:
-        kube_cluster: ${{ fromJSON(inputs.kube_cluster) }}
     uses: ./.github/workflows/my-reuseable.yml
     with:
       kube_cluster: ${{ matrix.kube_cluster }}

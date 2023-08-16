@@ -1,1 +1,42 @@
+name: DEV [REUSE]- MyAIS Admin Web JBoss Deployment
 
+on:
+  #repository_dispatch:
+  #types: [dev-myais-admin-web-jboss]
+  workflow_dispatch:
+    inputs:
+      aks-cluster:
+        description: Environment
+        required: true
+        default: "dev"
+      region:
+        description: region to run-on include 'asse' 'asea'
+        required: true
+        default: "['asse', 'asea']"
+
+jobs:
+  call-workflow-deploy-microservice:
+    strategy:
+      matrix:
+        region: ${{ fromJSON(inputs.region) }}
+    uses: ./.github/workflows/_reusable-myais-admin-web-jboss.yml
+    with:
+      REGION: ${{ matrix.region }}
+      RUNS_ON: myais-${{ matrix.region }}-dev
+      ENVIRONMENT: ${{ inputs.env }}
+      CLUSTER_NAME: ${{ format('aks-mya-az-{0}-dev-001', matrix.region) }}
+      CLUSTER_RESOURCE_GROUP: ${{ format('rg-mya-az-{0}-dev-001', matrix.region) }}
+      ACR_NAME: ${{ format('acrmyaaz{0}dev001', matrix.region) }}
+      NAMESPACE_PREFIX: "myais-admin-fe"
+      NAMESPACE_POSTFIX_ENABLED: true
+      PROJECT_NAME: "myais-admin-fe"
+      CONTAINER_REPOSITORY: ${{ format('acrmyaaz{0}dev001.azurecr.io', matrix.region) }}
+      IMAGE_NAME: "myais-admin-web-jboss"
+      IMAGE_TAG: "0.0.1-SNAPSHOT"
+      MICROSERVICE_NAME: "myais-admin-web-jboss"
+      KEYVAULT_NAME: ${{ format('kvmyaaz{0}dev001', matrix.region) }}
+      NODEJS_VERSION: "16"
+      HELM_ENABLED: true
+      HELM_DEFAULT_VALUE_PATH: ${{ format('helm-central/aistemplate/values-{0}.yaml', matrix.region) }}
+      ACR_IMAGE_SYNC: true
+    secrets: inherit

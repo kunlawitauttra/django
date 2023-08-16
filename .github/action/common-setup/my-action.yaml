@@ -7,15 +7,13 @@ on:
       kube_cluster:
         description: 'Please select your cluster'
         required: true
-        type: choice
-        options:
-         - myAKSCluster-hk
-         - myAKSCluster-sg
+        default: "myAKSCluster-sg"
+
       resource_group:
         description: 'Please enter your resource group'
         required: true
-        default: "['myResourceGroup']"
-     
+        default: "myResourceGroup"
+        
 runs:
   using: "composite"
   steps:

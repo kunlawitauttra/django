@@ -26,6 +26,6 @@ jobs:
     uses: ./.github/workflows/my-reuseable.yml
     with:
       kube_cluster: ${{ matrix.kube_cluster }}
-      runs_on: ${{ matrix.runs-on }}
+      runs_on: ${{ matrix.runs_on }}
       resource_group: ${{ matrix.resource_group }}
     secrets: inherit

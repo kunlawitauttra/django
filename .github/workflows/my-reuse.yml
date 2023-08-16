@@ -16,7 +16,6 @@ on:
         description: '(from my-reuse) Please enter your runner'
         required: true
         default: "ubuntu-latest"
-
 jobs:
   call-workflow-deploy-microservice:
     uses: ./.github/workflows/my-reuseable.yml

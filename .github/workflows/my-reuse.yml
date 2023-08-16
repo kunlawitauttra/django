@@ -12,7 +12,7 @@ on:
         description: '(from my-reuse) Please enter your resource group'
         required: true
         default: "myResourceGroup"
-      runs_on:
+      runs-on:
         description: '(from my-reuse) Please enter your runner'
         required: true
         default: "ubuntu-latest"
@@ -26,6 +26,6 @@ jobs:
     uses: ./.github/workflows/my-reuseable.yml
     with:
       kube_cluster: ${{ matrix.kube_cluster }}
-      runs_on: ${{ matrix.runs_on }}
+      runs-on: ${{ matrix.runs-on }}
       resource_group: ${{ matrix.resource_group }}
     secrets: inherit

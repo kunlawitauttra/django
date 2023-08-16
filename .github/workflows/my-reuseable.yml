@@ -1,0 +1,41 @@
+name: my-reuseable
+
+on:
+  workflow_call:
+    inputs:
+      RUNS-ON:
+        required: true
+        type: string
+      kube_cluster:
+        required: true
+        type: string
+      resource_group:
+        required: true
+        type: string
+
+jobs:
+  my-deploy-common:
+    name: Deploy Common
+    runs-on: ${{ inputs.RUNS-ON }}
+    steps:
+      - name: "Common Setup"
+        uses: ./.github/actions/common-setup
+      - name: Set AKS context
+        id: set-context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: '${{ secrets.resource_group }}'
+          cluster-name: ${{ inputs.kube-cluster }}
+      - name: Setup kubectl
+        id: install-kubectl
+        uses: azure/setup-kubectl@v3
+      - name: Deploy to AKS
+        id: deploy-aks
+        uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'default'
+          manifests: |
+             myapp.yaml
+          images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/myapp:${{ github.sha }}'
+          pull-images: false
+

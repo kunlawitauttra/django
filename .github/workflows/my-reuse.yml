@@ -1,0 +1,31 @@
+name: my-reuse
+on:
+  repository_dispatch:
+    types: [my-reuse]
+  workflow_dispatch:
+    inputs:
+      kube-cluster:
+        description: (from my-reuse) Please enter your cluster name
+        required: true
+        default: "myAKSCluster-sg"
+      resource_group:
+        description: 'Please enter your resource group'
+        required: true
+        default: "['myResourceGroup']"
+      runs-on:
+        description: (from my-reuse) Please enter your runner
+        required: true
+        default: "ubuntu-latest"
+
+jobs:
+  call-workflow-deploy-microservice:
+    strategy:
+      fail-fast: false
+      matrix:
+        kube-cluster: ${{ (inputs.kube-cluster && fromJSON(inputs.kube-cluster)) || fromJSON('["myAKSCluster-sg", "myAKSCluster-hk"]')  }}
+    uses: ./.github/workflows/my-reuseable.yml
+    with:
+      kube-cluster: ${{ matrix.kube-cluster }}
+      runs-on: ${{ matrix.runs-on }}
+      resource_group: ${{ matrix.resource_group }}
+    secrets: inherit

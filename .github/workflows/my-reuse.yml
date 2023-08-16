@@ -5,15 +5,15 @@ on:
   workflow_dispatch:
     inputs:
       kube_cluster:
-        description: (from my-reuse) Please enter your cluster name
+        description: '(from my-reuse) Please enter your cluster name'
         required: true
         default: "myAKSCluster-sg"
       resource_group:
-        description: 'Please enter your resource group'
+        description: '(from my-reuse) Please enter your resource group'
         required: true
         default: "myResourceGroup"
       runs_on:
-        description: (from my-reuse) Please enter your runner
+        description: '(from my-reuse) Please enter your runner'
         required: true
         default: "ubuntu-latest"
 

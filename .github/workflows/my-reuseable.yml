@@ -3,7 +3,7 @@ name: my-reuseable
 on:
   workflow_call:
     inputs:
-      RUNS-ON:
+      runs-on:
         required: true
         type: string
       kube_cluster:

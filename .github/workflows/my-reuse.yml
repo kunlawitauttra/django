@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        kube-cluster: ${{ (inputs.kube_cluster && fromJSON(inputs.kube-cluster)) || fromJSON('["myAKSCluster-sg", "myAKSCluster-hk"]')  }}
+        kube_cluster: ${{ (inputs.kube_cluster && fromJSON(inputs.kube_cluster)) || fromJSON('["myAKSCluster-sg", "myAKSCluster-hk"]')  }}
     uses: ./.github/workflows/my-reuseable.yml
     with:
       kube_cluster: ${{ matrix.kube_cluster }}

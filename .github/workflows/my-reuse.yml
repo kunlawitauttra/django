@@ -4,7 +4,7 @@ on:
     types: [my-reuse]
   workflow_dispatch:
     inputs:
-      kube-cluster:
+      kube_cluster:
         description: (from my-reuse) Please enter your cluster name
         required: true
         default: "myAKSCluster-sg"
@@ -22,10 +22,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        kube-cluster: ${{ (inputs.kube-cluster && fromJSON(inputs.kube-cluster)) || fromJSON('["myAKSCluster-sg", "myAKSCluster-hk"]')  }}
+        kube-cluster: ${{ (inputs.kube_cluster && fromJSON(inputs.kube-cluster)) || fromJSON('["myAKSCluster-sg", "myAKSCluster-hk"]')  }}
     uses: ./.github/workflows/my-reuseable.yml
     with:
-      kube-cluster: ${{ matrix.kube-cluster }}
+      kube-cluster: ${{ matrix.kube_cluster }}
       runs-on: ${{ matrix.runs-on }}
       resource_group: ${{ matrix.resource_group }}
     secrets: inherit

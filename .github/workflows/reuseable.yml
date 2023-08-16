@@ -13,7 +13,6 @@ jobs:
   deploy-common:
     name: Deploy Common
     runs-on: ${{ inputs.RUNS_ON }}
-    environment: ${{ inputs.ENVIRONMENT }}
     steps:
       - name: Checkout pipelines
         uses: actions/checkout@v3
@@ -21,18 +20,4 @@ jobs:
       - name: "Common Setup"
         uses: ./.github/workflows/action.yml
         with:
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          AZURE_SELFHOST_USER_MANAGE_IDENTITY_CLIENT_ID: ${{ secrets[format('AZURE_SELFHOST_{0}_USER_MANAGE_IDENTITY_CLIENT_ID', inputs.REGION)] }}
-          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          HELM_ENABLED: "true"
-          HELM_REPOSITORY_NAME: ${{ inputs.HELM_REPOSITORY_NAME }}
-          HELM_CHECKOUT_REF: ${{ inputs.HELM_CHECKOUT_REF }}
-          HELM_CHECKOUT_PATH: ${{ inputs.HELM_CHECKOUT_PATH }}
-          SOURCE_HELM_VALUE_PATH: ${{ inputs.SOURCE_HELM_VALUE_PATH }}
-          DESTINATION_HELM_VALUE_PATH: ${{ inputs.DESTINATION_HELM_VALUE_PATH }}
-          CLUSTER_RESOURCE_GROUP: ${{ inputs.CLUSTER_RESOURCE_GROUP }}
           CLUSTER_NAME: ${{ inputs.CLUSTER_NAME }} 
-          NAMESPACE_PREFIX: ${{ inputs.NAMESPACE_PREFIX }} 
-          NAMESPACE_POSTFIX_ENABLED: ${{ inputs.NAMESPACE_POSTFIX_ENABLED }} 
-          ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
-          ACR_IMAGE_SYNC: "false"

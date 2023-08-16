@@ -1,4 +1,4 @@
-name: reuseable-workflow01
+name: reusable-workflow01
 
 on:
   workflow_call:

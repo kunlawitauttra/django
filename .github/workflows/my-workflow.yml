@@ -15,7 +15,11 @@ jobs:
           echo "Add other actions to build,"
           echo "test, and deploy your project."
 
-  call-workflow-local-repo:
+  call-workflow-local-repository:
+    strategy:
+      matrix:
+        nodeverion: [14, 16, 18, 20]
     uses: ./.github/workflows/reusable-workflow01.yml
     with:
-      node: 8
+      node: ${{ matrix.nodeversion }}
+      #node: 8

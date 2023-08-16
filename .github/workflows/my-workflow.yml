@@ -18,7 +18,7 @@ jobs:
   call-workflow-local-repository:
     strategy:
       matrix:
-        nodeverion: [14, 16, 18, 20]
+        nodeversion: [14, 16, 18, 20]
     uses: ./.github/workflows/reusable-workflow01.yml
     with:
       node: ${{ matrix.nodeversion }}

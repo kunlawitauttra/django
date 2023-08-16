@@ -14,7 +14,7 @@ on:
         required: true
         default: "myResourceGroup"
         
-      runs_on:
+      runs-on:
         description: 'Please enter your runner'
         required: true
         default: "ubuntu-latest"

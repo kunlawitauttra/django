@@ -18,6 +18,8 @@ jobs:
     name: Deploy Common
     runs-on: ${{ inputs.runs-on }}
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
       - name: "Common Setup"
         uses: ./.github/actions/common-setup
       - name: Set AKS context

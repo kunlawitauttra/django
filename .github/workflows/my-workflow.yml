@@ -16,6 +16,6 @@ jobs:
           echo "test, and deploy your project."
 
   call-workflow-local-repo:
-    uses: ./.github/workflows/reusable-workflow01.yml
+    uses: ./.github/workflows/reuseable-workflow01.yml
     with:
       node: 8

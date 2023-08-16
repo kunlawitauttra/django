@@ -11,7 +11,7 @@ on:
       resource_group:
         description: 'Please enter your resource group'
         required: true
-        default: "['myResourceGroup']"
+        default: "myResourceGroup"
       runs-on:
         description: (from my-reuse) Please enter your runner
         required: true

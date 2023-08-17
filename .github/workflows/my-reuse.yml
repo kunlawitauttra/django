@@ -3,15 +3,19 @@ on:
   workflow_dispatch:
     inputs:
       RUNS_ON:
+        description: RUNS_ON
         required: true
         default: ubuntu-latest
         type: string
       KUBE_CLUSTER:
+        description: KUBE_CLUSTER
         required: true
         default: myAKSCluster-sg
         type: string
       REGISTRY:
+        description: REGISTRY
         required: true
+        default: kunlawit26acr
         type: string
 jobs:
   call-workflow-deploy-microservice:

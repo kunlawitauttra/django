@@ -9,7 +9,6 @@ on:
         type: string
       KUBE_CLUSTER:
         required: true
-        default: myAKSCluster-sg
         type: string
       REGISTRY:
         required: true

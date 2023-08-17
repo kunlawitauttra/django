@@ -1,6 +1,6 @@
 name: my-reuse
 on:
-  repository_dispatch:
+  workflow_dispatch:
     inputs:
       RUNS_ON:
         required: true

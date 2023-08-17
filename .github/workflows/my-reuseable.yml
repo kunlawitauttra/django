@@ -13,7 +13,6 @@ on:
         type: string
       REGISTRY:
         required: true
-        default: kunlawit26acr
         type: string
 
 jobs:

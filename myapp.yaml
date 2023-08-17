@@ -21,7 +21,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: myapp
-        image: xxxacr.azurecr.io/dejango/myapp
+        image: kunlawit26acrhk.azurecr.io/dejango/myapp
         imagePullPolicy: Always
         ports:
         - containerPort: 8000

@@ -3,31 +3,52 @@ name: my-reuseable
 on:
   workflow_call:
     inputs:
-      runs-on:
+      RUNS_ON:
         required: true
+        default: ubuntu-latest
         type: string
-      kube_cluster:
+      KUBE_CLUSTER:
         required: true
+        default: myAKSCluster-sg
         type: string
-      resource_group:
+      REGISTRY:
         required: true
+        default: kunlawit26acr
         type: string
 
 jobs:
-  my-deploy-common:
-    name: Deploy Common
-    runs-on: ${{ inputs.runs-on }}
+  build:
+    runs-on: ${{ inputs.RUNS_ON }}
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: "Common Setup"
-        uses: ./.github/actions/common-setup
+      - name: Checkout source code 
+        uses: actions/checkout@v3
+      - name: Public IP
+        id: ip
+        uses: haythem/public-ip@v1.3
+      - name: ACR build
+        id: build-push-acr
+        uses: azure/acr-build@v1
+        with:
+          service_principal: ${{ secrets.service_principal }}
+          service_principal_password: ${{ secrets.service_principal_password }}
+          tenant: ${{ secrets.tenant }}
+          registry: ${{ inputs.REGISTRY }}
+          repository: ${{ secrets.repository }}
+          image:  myapp
+          folder: django/myproject
+          branch: master
+          tag: ${{ github.sha }}
+      - name: Azure login
+        id: login
+        uses: azure/login@v1.4.3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Set AKS context
         id: set-context
         uses: azure/aks-set-context@v3
         with:
-          resource-group: '${{ inputs.resource_group }}'
-          cluster-name: ${{ inputs.kube_cluster }}
+          resource-group: '${{ secrets.resource_group }}'
+          cluster-name: ${{ inputs.KUBE_CLUSTER }}
       - name: Setup kubectl
         id: install-kubectl
         uses: azure/setup-kubectl@v3
@@ -38,6 +59,5 @@ jobs:
           namespace: 'default'
           manifests: |
              myapp.yaml
-          images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/myapp:${{ github.sha }}'
+          images: '${{ inputs.REGISTRY }}.azurecr.io/${{ secrets.repository }}/myapp:${{ github.sha }}'
           pull-images: false
-

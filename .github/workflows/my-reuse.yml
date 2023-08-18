@@ -29,5 +29,5 @@ jobs:
       RUNS_ON: ${{ inputs.RUNS_ON }}
       KUBE_CLUSTER: ${{ inputs.KUBE_CLUSTER }}
       REGISTRY: ${{ inputs.REGISTRY }}
-      APP: ${{ inputs.IMAGE }}
+      IMAGE: ${{ inputs.IMAGE }}
     secrets: inherit

@@ -18,7 +18,7 @@ on:
         default: kunlawit26acr
         type: string
       IMAGE:
-        description: APP
+        description: IMAGE
         required: true
         default: myapp
         type: string

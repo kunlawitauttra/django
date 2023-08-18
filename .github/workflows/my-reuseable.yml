@@ -13,7 +13,7 @@ on:
       REGISTRY:
         required: true
         type: string
-      APP:
+      IMAGE:
         required: true
         type: string
 
@@ -59,6 +59,6 @@ jobs:
         with:
           namespace: 'default'
           manifests: |
-             ${{ inputs.APP }}.yaml
+             ${{ inputs.IMAGE }}.yaml
           images: '${{ inputs.REGISTRY }}.azurecr.io/${{ secrets.repository }}/myapp:${{ github.sha }}'
           pull-images: false

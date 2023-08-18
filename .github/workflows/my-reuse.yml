@@ -17,7 +17,7 @@ on:
         required: true
         default: kunlawit26acr
         type: string
-      APP:
+      IMAGE:
         description: APP
         required: true
         default: myapp
@@ -29,5 +29,5 @@ jobs:
       RUNS_ON: ${{ inputs.RUNS_ON }}
       KUBE_CLUSTER: ${{ inputs.KUBE_CLUSTER }}
       REGISTRY: ${{ inputs.REGISTRY }}
-      APP: ${{ inputs.APP }}
+      APP: ${{ inputs.IMAGE }}
     secrets: inherit

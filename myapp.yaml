@@ -41,4 +41,4 @@ spec:
   ports:
   - port: 80
   selector:
-    app: myapp_remotexxx02
+    app: myapp_remotexxx03

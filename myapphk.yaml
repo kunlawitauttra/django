@@ -41,4 +41,4 @@ spec:
   ports:
   - port: 80
   selector:
-    app: myapp_commit03
+    app: myapp_commit03_from_web

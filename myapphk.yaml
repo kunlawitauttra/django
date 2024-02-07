@@ -41,4 +41,4 @@ spec:
   ports:
   - port: 80
   selector:
-    app: myapp_commit04_localxxx
+    app: myapp_commit04_localxxx02
